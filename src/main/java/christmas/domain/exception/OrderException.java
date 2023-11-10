@@ -45,10 +45,17 @@ public class OrderException extends IllegalArgumentException {
     }
 
     private static void checkOnlyDrink(List<OrderItem> orderItemList) {
+        boolean allDrinks = true;
+
         for (OrderItem orderItem : orderItemList) {
-            if (orderItem.getMenu().getCategory().equals("음료")) {
-                throw new OrderException(ErrorMessage.ORDER_ONLY_DRINK_ERROR_MESSAGE.getErrorMessage());
+            if (!orderItem.getMenu().getCategory().equals("음료")) {
+                allDrinks = false;
+                break;
             }
+        }
+
+        if (allDrinks) {
+            throw new OrderException(ErrorMessage.ORDER_ONLY_DRINK_ERROR_MESSAGE.getErrorMessage());
         }
     }
 

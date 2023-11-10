@@ -1,8 +1,10 @@
 package christmas.controller;
 
 import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.List;
 
 public class ChristmasController {
     private final InputView inputView;
@@ -37,6 +39,7 @@ public class ChristmasController {
         while (true) {
             try {
                 Order order = inputView.readMenuOrder();
+                outputView.showOrderList(order);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

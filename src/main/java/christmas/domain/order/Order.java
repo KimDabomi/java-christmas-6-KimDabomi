@@ -4,12 +4,11 @@ import christmas.domain.event.Menu;
 
 import christmas.domain.exception.OrderException;
 import java.util.List;
-import java.util.Map;
 
 public class Order {
-    private final Map<Menu, Integer> orderItems;
+    private final List<OrderItem> orderItems;
 
-    public Order(Map<Menu, Integer> orderItems) {
+    public Order(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -20,6 +19,18 @@ public class Order {
         OrderException.checkDateRange(visitingDate);
 
         return visitingDate;
+    }
+
+    public void printOrderItems() {
+        StringBuilder orderList = new StringBuilder();
+        for (int i = 0; i < orderItems.size(); i++) {
+            OrderItem item = orderItems.get(i);
+            orderList.append(item.getMenu().getFoodName()).append("-").append(item.getQuantity());
+            if (i < orderItems.size() - 1) {
+                orderList.append(",");
+            }
+        }
+        System.out.println(orderList.toString());
     }
 
     public static Order getOrderItems(String[] menuItems, List<OrderItem> orderItemList) {
@@ -36,7 +47,7 @@ public class Order {
         }
 
         OrderException.checkOrderItemExceptions(orderItemList);
-        return null;
+        return new Order(orderItemList);
     }
 
     public static int getTotalAmountBeforeDiscount(List<OrderItem> orderItemsList) {
