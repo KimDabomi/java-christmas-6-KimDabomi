@@ -7,7 +7,6 @@ import christmas.domain.order.Order;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class InputView {
     public InputView() {
     }

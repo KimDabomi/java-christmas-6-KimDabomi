@@ -7,7 +7,6 @@ public class OrderItemException extends IllegalArgumentException {
         super(errorMessage);
     }
 
-
     public static void checkQuantityType(String quantity) {
         if (!quantity.matches(numberType)) {
             throw new OrderItemException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());

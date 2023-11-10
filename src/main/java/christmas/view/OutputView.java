@@ -1,8 +1,6 @@
 package christmas.view;
 
 import christmas.domain.order.Order;
-import christmas.domain.order.OrderItem;
-import java.util.List;
 
 public class OutputView {
     private Order order;

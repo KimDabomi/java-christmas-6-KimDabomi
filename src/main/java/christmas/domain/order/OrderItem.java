@@ -1,7 +1,6 @@
 package christmas.domain.order;
 
 import christmas.domain.event.Menu;
-import christmas.domain.exception.OrderException;
 import christmas.domain.exception.OrderItemException;
 
 public class OrderItem {
