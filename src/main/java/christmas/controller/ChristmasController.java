@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.domain.order.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.time.LocalDate;
 
 public class ChristmasController {
     private final InputView inputView;
@@ -33,8 +34,11 @@ public class ChristmasController {
             try {
                 String dateInput = inputView.readDate();
                 int date = Order.getDate(dateInput);
+                LocalDate localDate = LocalDate.ofEpochDay(date);
                 Order order = inputView.readMenuOrder();
                 printOrder(order, date);
+                startDiscountList(order, localDate);
+                startFinalAmount(order, localDate);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -47,5 +51,15 @@ public class ChristmasController {
         outputView.showEventPreview(date);
         outputView.showOrderList(order);
         outputView.showTotalAmountBeforeDiscount(order);
+        outputView.showGiftMenu(order, LocalDate.ofEpochDay(date));
+    }
+
+    private void startDiscountList(Order order, LocalDate date) {
+        outputView.showDiscountList(order, date);
+        outputView.showTotalDiscountAmount(order, date);
+    }
+
+    private void startFinalAmount(Order order, LocalDate date) {
+        outputView.showFinalAmount(order, date);
     }
 }
