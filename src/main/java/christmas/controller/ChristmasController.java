@@ -20,12 +20,7 @@ public class ChristmasController {
     private void startDate() {
         while (true) {
             try {
-                String dateInput = inputView.readDate();
-                int date = Order.getDate(dateInput);
-
                 startOrder();
-
-                outputView.showEventPreview(date);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -36,12 +31,21 @@ public class ChristmasController {
     private void startOrder() {
         while (true) {
             try {
+                String dateInput = inputView.readDate();
+                int date = Order.getDate(dateInput);
                 Order order = inputView.readMenuOrder();
-                outputView.showOrderList(order);
+                printOrder(order, date);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private void printOrder(Order order, int date) {
+        outputView.showOrderItems(order);
+        outputView.showEventPreview(date);
+        outputView.showOrderList(order);
+        outputView.showTotalAmountBeforeDiscount(order);
     }
 }

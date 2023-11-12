@@ -1,6 +1,6 @@
 package christmas.domain.order;
 
-import christmas.domain.event.Menu;
+import christmas.domain.menu.Menu;
 
 import christmas.domain.exception.OrderException;
 import java.util.List;
@@ -21,18 +21,6 @@ public class Order {
         return visitingDate;
     }
 
-    public void printOrderItems() {
-        StringBuilder orderList = new StringBuilder();
-        for (int i = 0; i < orderItems.size(); i++) {
-            OrderItem item = orderItems.get(i);
-            orderList.append(item.getMenu().getFoodName()).append("-").append(item.getQuantity());
-            if (i < orderItems.size() - 1) {
-                orderList.append(",");
-            }
-        }
-        System.out.println(orderList.toString());
-    }
-
     public static Order getOrderItems(String[] menuItems, List<OrderItem> orderItemList) {
         for (String item : menuItems) {
             String[] details = item.split("-");
@@ -50,14 +38,42 @@ public class Order {
         return new Order(orderItemList);
     }
 
-    public static int getTotalAmountBeforeDiscount(List<OrderItem> orderItemsList) {
+    public int getTotalAmountBeforeDiscount() {
         int totalAmountBeforeDiscount = 0;
 
-        for (OrderItem orderItem : orderItemsList) {
+        for (OrderItem orderItem : this.orderItems) {
             totalAmountBeforeDiscount += orderItem.getQuantity() * orderItem.getMenu().getPrice();
         }
 
         OrderException.checkMinimumTotalAmount(totalAmountBeforeDiscount);
         return totalAmountBeforeDiscount;
+    }
+
+    public int getTotalQuantityForCategory(String category) {
+        return orderItems.stream()
+                .filter(item -> item.getMenu().getCategory().equals(category))
+                .mapToInt(OrderItem::getQuantity)
+                .sum();
+    }
+
+    public void printOrderItems() {
+        StringBuilder orderList = new StringBuilder();
+        for (int i = 0; i < orderItems.size(); i++) {
+            OrderItem item = orderItems.get(i);
+            orderList.append(item.getMenu().getFoodName()).append("-").append(item.getQuantity());
+            if (i < orderItems.size() - 1) {
+                orderList.append(",");
+            }
+        }
+        System.out.println(orderList.toString());
+    }
+
+    public void printOrderList() {
+        StringBuilder orderList = new StringBuilder();
+        for (int i = 0; i < orderItems.size(); i++) {
+            OrderItem item = orderItems.get(i);
+            orderList.append(item.getMenu().getFoodName()).append(" ").append(item.getQuantity()).append("개\n");
+        }
+        System.out.println(orderList.toString());
     }
 }
