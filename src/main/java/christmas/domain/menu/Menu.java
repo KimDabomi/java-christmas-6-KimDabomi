@@ -1,4 +1,4 @@
-package christmas.domain.event;
+package christmas.domain.menu;
 
 import christmas.domain.exception.ErrorMessage;
 import java.util.Collections;

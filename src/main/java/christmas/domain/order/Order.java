@@ -45,7 +45,6 @@ public class Order {
             totalAmountBeforeDiscount += orderItem.getQuantity() * orderItem.getMenu().getPrice();
         }
 
-        OrderException.checkMinimumTotalAmount(totalAmountBeforeDiscount);
         return totalAmountBeforeDiscount;
     }
 

@@ -22,12 +22,6 @@ public class OrderException extends IllegalArgumentException {
         }
     }
 
-    public static void checkMinimumTotalAmount(int totalAmount) {
-        if (totalAmount < NumberOfException.MIN_AMOUNT.getNumber()) {
-            throw new OrderException(ErrorMessage.TOTAL_AMOUNT_MINIMUN_ERROR_MESSAGE.getErrorMessage());
-        }
-    }
-
     public static void checkOrderType(String[] menuItems) {
         for (String menuItem : menuItems) {
             String[] details = menuItem.split("-");
