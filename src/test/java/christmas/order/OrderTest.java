@@ -3,7 +3,7 @@ package christmas.order;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import christmas.domain.event.Menu;
+import christmas.domain.menu.Menu;
 import christmas.domain.exception.ErrorMessage;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
@@ -120,18 +120,9 @@ public class OrderTest {
     void getTotalPriceBeforeDiscount_할인_전_총_금액_확인() {
         OrderItem orderItem = new OrderItem(Menu.T_BONE_STEAK, "4");
         List<OrderItem> orderItemsList = new ArrayList<OrderItem>();
+        Order order = new Order(orderItemsList);
         orderItemsList.add(orderItem);
-        int totalPrice = Order.getTotalAmountBeforeDiscount(orderItemsList);
+        int totalPrice = order.getTotalAmountBeforeDiscount();
         assertThat(totalPrice).isEqualTo(220000);
-    }
-
-    @Test
-    @DisplayName("최소주문금액이 10,000원 미만인 경우 예외 확인")
-    void getTotalPriceBeforeDiscount_최소주문금액_10000원_미만인_경우() {
-        OrderItem orderItem = new OrderItem(Menu.MUSHROOM_SOUP, "1");
-        List<OrderItem> orderItemsList = new ArrayList<OrderItem>();
-        orderItemsList.add(orderItem);
-        assertThatThrownBy(() -> Order.getTotalAmountBeforeDiscount(orderItemsList))
-                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ErrorMessage.TOTAL_AMOUNT_MINIMUN_ERROR_MESSAGE.getErrorMessage());
     }
 }
