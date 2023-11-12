@@ -1,6 +1,6 @@
 package christmas.domain.exception;
 
-public enum Restriction {
+public enum NumberOfException {
     MIN_DATE(1),
     MAX_DATE(31),
     MIN_AMOUNT(10000),
@@ -8,13 +8,13 @@ public enum Restriction {
     MAX_QUANTITY(20),
     ORDER_LIST_SIZE(2);
 
-    private final int number;
+    private final int numberOfException;
 
-    Restriction(int number) {
-        this.number = number;
+    NumberOfException(int numberOfException) {
+        this.numberOfException = numberOfException;
     }
 
     public int getNumber() {
-        return number;
+        return numberOfException;
     }
 }

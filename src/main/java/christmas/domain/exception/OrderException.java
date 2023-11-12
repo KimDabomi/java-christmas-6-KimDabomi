@@ -17,13 +17,13 @@ public class OrderException extends IllegalArgumentException {
     }
 
     public static void checkDateRange(int date) {
-        if (date < Restriction.MIN_DATE.getNumber() || date > Restriction.MAX_DATE.getNumber()) {
+        if (date < NumberOfException.MIN_DATE.getNumber() || date > NumberOfException.MAX_DATE.getNumber()) {
             throw new OrderException(ErrorMessage.DATE_RANGE_ERROR_MESSAGE.getErrorMessage());
         }
     }
 
     public static void checkMinimumTotalAmount(int totalAmount) {
-        if (totalAmount < Restriction.MIN_AMOUNT.getNumber()) {
+        if (totalAmount < NumberOfException.MIN_AMOUNT.getNumber()) {
             throw new OrderException(ErrorMessage.TOTAL_AMOUNT_MINIMUN_ERROR_MESSAGE.getErrorMessage());
         }
     }
@@ -31,7 +31,7 @@ public class OrderException extends IllegalArgumentException {
     public static void checkOrderType(String[] menuItems) {
         for (String menuItem : menuItems) {
             String[] details = menuItem.split("-");
-            if (details.length != Restriction.ORDER_LIST_SIZE.getNumber()) {
+            if (details.length != NumberOfException.ORDER_LIST_SIZE.getNumber()) {
                 throw new IllegalArgumentException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
             }
         }
@@ -64,14 +64,14 @@ public class OrderException extends IllegalArgumentException {
         for (OrderItem orderItem : orderItemList) {
             totalQuantity += orderItem.getQuantity();
         }
-        if (totalQuantity > Restriction.MAX_QUANTITY.getNumber()) {
+        if (totalQuantity > NumberOfException.MAX_QUANTITY.getNumber()) {
             throw new OrderException(ErrorMessage.ORDER_TOTAL_QUANTITY_MAXIMUM_ERROR_MESSAGE.getErrorMessage());
         }
     }
 
     private static void checkQuantityRange(List<OrderItem> orderItemList) {
         for (OrderItem orderItem : orderItemList) {
-            if (orderItem.getQuantity() < Restriction.MIN_QUANTITY.getNumber()) {
+            if (orderItem.getQuantity() < NumberOfException.MIN_QUANTITY.getNumber()) {
                 throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
             }
         }
