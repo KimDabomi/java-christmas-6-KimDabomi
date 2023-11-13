@@ -4,6 +4,7 @@ import christmas.domain.order.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.time.LocalDate;
+import java.util.function.Supplier;
 
 public class ChristmasController {
     private final InputView inputView;
@@ -30,34 +31,27 @@ public class ChristmasController {
     }
 
     private void processOrder() {
-        while (true) {
-            try {
-                String dateInput = inputView.readDate();
-                int date = Order.getDate(dateInput);
-                LocalDate localDate = LocalDate.ofEpochDay(date);
+        executeWithRetry(() -> {
+            String dateInput = inputView.readDate();
+            int date = Order.getDate(dateInput);
+            LocalDate localDate = LocalDate.ofEpochDay(date);
 
-                processEvent(date, localDate);
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+            processEvent(date, localDate);
+            return null;
+        });
     }
 
     private void processEvent(int date, LocalDate localDate) {
-        while (true) {
-            try {
-                Order order = inputView.readMenuOrder();
+        executeWithRetry(() -> {
+            Order order = inputView.readMenuOrder();
 
-                printOrder(order, date);
-                startDiscountList(order, localDate);
-                startFinalAmount(order, localDate);
-                startBadge(order, localDate);
-                return;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+            printOrder(order, date);
+            startDiscountList(order, localDate);
+            startFinalAmount(order, localDate);
+            startBadge(order, localDate);
+
+            return null;
+        });
     }
 
     private void printOrder(Order order, int date) {
@@ -79,5 +73,15 @@ public class ChristmasController {
 
     private void startBadge(Order order, LocalDate date) {
         outputView.showBadge(order, date);
+    }
+
+    private <T> T executeWithRetry(Supplier<T> action) {
+        while (true) {
+            try {
+                return action.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
