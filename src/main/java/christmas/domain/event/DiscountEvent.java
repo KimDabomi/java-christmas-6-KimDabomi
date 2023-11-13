@@ -74,6 +74,12 @@ public enum DiscountEvent {
         return totalAmount;
     }
 
+    public static int getTotalAmount(Order order, LocalDate date) {
+        int totalBeforeDiscountAmount = order.getTotalAmountBeforeDiscount();
+        int totalDiscountAmount = DiscountEvent.getTotalDiscountAmount(order, date);
+        return totalBeforeDiscountAmount - totalDiscountAmount + DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
+    }
+
     private static boolean isWeekday(LocalDate date) {
         DayOfWeek day = date.getDayOfWeek();
         return day != DayOfWeek.FRIDAY && day != DayOfWeek.SATURDAY;

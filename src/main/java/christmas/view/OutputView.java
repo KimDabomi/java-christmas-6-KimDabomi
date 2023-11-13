@@ -78,9 +78,7 @@ public class OutputView {
     }
 
     public void showFinalAmount(Order order, LocalDate date) {
-        int totalBeforeDiscountAmount = order.getTotalAmountBeforeDiscount();
-        int totalDiscountAmount = DiscountEvent.getTotalDiscountAmount(order, date);
-        int finalAmount = totalBeforeDiscountAmount - totalDiscountAmount;
+        int finalAmount = DiscountEvent.getTotalAmount(order, date);
         String totalFinalAmount = formatAmount(finalAmount);
 
         System.out.println("\n<할인 후 예상 결제 금액>");
@@ -97,8 +95,11 @@ public class OutputView {
 
     private void showChristmasDiscount(Order order, LocalDate date) {
         String christmasDiscountAmount = formatAmount(DiscountEvent.CHRISTMAS_D_DAY.calculateDiscount(order, date));
-        System.out.printf("크리스마스 디데이 할인: -%s원", christmasDiscountAmount);
-        System.out.println();
+
+        if (!christmasDiscountAmount.equals("0")) {
+            System.out.printf("크리스마스 디데이 할인: -%s원", christmasDiscountAmount);
+            System.out.println();
+        }
     }
 
     private void showWeekdayDiscount(Order order, LocalDate date) {
