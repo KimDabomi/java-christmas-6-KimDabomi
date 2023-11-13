@@ -21,7 +21,7 @@ public class ChristmasController {
     private void startDate() {
         while (true) {
             try {
-                startOrder();
+                processOrder();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -29,18 +29,32 @@ public class ChristmasController {
         }
     }
 
-    private void startOrder() {
+    private void processOrder() {
         while (true) {
             try {
                 String dateInput = inputView.readDate();
                 int date = Order.getDate(dateInput);
                 LocalDate localDate = LocalDate.ofEpochDay(date);
+
+
+                processEvent(date, localDate);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void processEvent(int date, LocalDate localDate) {
+        while (true) {
+            try {
                 Order order = inputView.readMenuOrder();
                 printOrder(order, date);
                 startDiscountList(order, localDate);
                 startFinalAmount(order, localDate);
                 startBadge(order, localDate);
-                break;
+
+                return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
