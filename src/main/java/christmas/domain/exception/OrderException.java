@@ -25,8 +25,9 @@ public class OrderException extends IllegalArgumentException {
     public static void checkOrderType(String[] menuItems) {
         for (String menuItem : menuItems) {
             String[] details = menuItem.split("-");
+
             if (details.length != NumberOfException.ORDER_LIST_SIZE.getNumber()) {
-                throw new IllegalArgumentException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
+                throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
             }
         }
     }
@@ -55,11 +56,13 @@ public class OrderException extends IllegalArgumentException {
 
     private static void checkTotalQuantity(List<OrderItem> orderItemList) {
         int totalQuantity = 0;
+
         for (OrderItem orderItem : orderItemList) {
             totalQuantity += orderItem.getQuantity();
         }
+
         if (totalQuantity > NumberOfException.MAX_QUANTITY.getNumber()) {
-            throw new OrderException(ErrorMessage.ORDER_TOTAL_QUANTITY_MAXIMUM_ERROR_MESSAGE.getErrorMessage());
+            throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
         }
     }
 

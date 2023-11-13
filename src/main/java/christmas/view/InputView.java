@@ -14,6 +14,7 @@ public class InputView {
     public String readDate() {
         System.out.println(ViewMessage.START_MESSAGE.getViewMessage());
         System.out.println(ViewMessage.ASK_DATE_MESSAGE.getViewMessage());
+
         return Console.readLine();
     }
 
@@ -22,6 +23,6 @@ public class InputView {
         String[] menuItems = Console.readLine().split(ViewMessage.SPLIT_CRITERIA.getViewMessage());
         List<OrderItem> orderItemList = new ArrayList<>();
 
-        return  Order.getOrderItems(menuItems, orderItemList);
+        return Order.getOrderItems(menuItems, orderItemList);
     }
 }

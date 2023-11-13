@@ -15,6 +15,7 @@ public enum DiscountEvent {
             if (christmasDays[0] > dayOfMonth || christmasDays[1] < dayOfMonth) {
                 return NumberOfEvent.ZERO.getNumberOfEvent();
             }
+
             return (dayOfMonth - NumberOfEvent.ONE_DAY.getNumberOfEvent()) * NumberOfEvent.HUNDRED_WON.getNumberOfEvent() + NumberOfEvent.THOUSAND_WON.getNumberOfEvent();
         }
     },
@@ -24,6 +25,7 @@ public enum DiscountEvent {
             if (isWeekday(date)) {
                 return order.getTotalQuantityForCategory("디저트") * NumberOfEvent.DISCOUNT_UNIT.getNumberOfEvent();
             }
+
             return NumberOfEvent.ZERO.getNumberOfEvent();
         }
     },
@@ -33,6 +35,7 @@ public enum DiscountEvent {
             if (isWeekend(date)) {
                 return order.getTotalQuantityForCategory("메인") * NumberOfEvent.DISCOUNT_UNIT.getNumberOfEvent();
             }
+
             return NumberOfEvent.ZERO.getNumberOfEvent();
         }
     },
@@ -44,6 +47,7 @@ public enum DiscountEvent {
             if (specialDays.contains(date.getDayOfMonth() - 1)) {
                 return NumberOfEvent.THOUSAND_WON.getNumberOfEvent();
             }
+
             return NumberOfEvent.ZERO.getNumberOfEvent();
         }
     },
@@ -53,6 +57,7 @@ public enum DiscountEvent {
             if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.EVENT_MIN_TOTAL_PRICE.getNumberOfEvent()) {
                 return NumberOfEvent.CHAMPAGNE_PRICE.getNumberOfEvent();
             }
+
             return NumberOfEvent.ZERO.getNumberOfEvent();
         }
     };
@@ -77,6 +82,7 @@ public enum DiscountEvent {
     public static int getTotalAmount(Order order, LocalDate date) {
         int totalBeforeDiscountAmount = order.getTotalAmountBeforeDiscount();
         int totalDiscountAmount = DiscountEvent.getTotalDiscountAmount(order, date);
+
         return totalBeforeDiscountAmount - totalDiscountAmount + DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
     }
 

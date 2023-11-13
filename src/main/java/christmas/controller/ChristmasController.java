@@ -36,7 +36,6 @@ public class ChristmasController {
                 int date = Order.getDate(dateInput);
                 LocalDate localDate = LocalDate.ofEpochDay(date);
 
-
                 processEvent(date, localDate);
                 break;
             } catch (IllegalArgumentException e) {
@@ -49,11 +48,11 @@ public class ChristmasController {
         while (true) {
             try {
                 Order order = inputView.readMenuOrder();
+
                 printOrder(order, date);
                 startDiscountList(order, localDate);
                 startFinalAmount(order, localDate);
                 startBadge(order, localDate);
-
                 return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

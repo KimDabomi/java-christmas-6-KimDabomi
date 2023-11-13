@@ -57,6 +57,7 @@ public class Order {
 
     public void printOrderItems() {
         StringBuilder orderList = new StringBuilder();
+
         for (int i = 0; i < orderItems.size(); i++) {
             OrderItem item = orderItems.get(i);
             orderList.append(item.getMenu().getFoodName()).append("-").append(item.getQuantity());
@@ -64,15 +65,18 @@ public class Order {
                 orderList.append(",");
             }
         }
+
         System.out.println(orderList.toString());
     }
 
     public void printOrderList() {
         StringBuilder orderList = new StringBuilder();
+
         for (int i = 0; i < orderItems.size(); i++) {
             OrderItem item = orderItems.get(i);
             orderList.append(item.getMenu().getFoodName()).append(" ").append(item.getQuantity()).append("개\n");
         }
+
         System.out.println(orderList.toString());
     }
 }

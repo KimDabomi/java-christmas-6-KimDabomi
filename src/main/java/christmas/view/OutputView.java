@@ -60,6 +60,7 @@ public class OutputView {
         if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             showDiscount(order, date);
         }
+
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
         }
@@ -74,6 +75,7 @@ public class OutputView {
             System.out.printf("-%s원", totalDiscountAmount);
             System.out.println();
         }
+
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             totalAmount = 0;
             System.out.printf("%d원", totalAmount);
@@ -97,6 +99,7 @@ public class OutputView {
         if (totalAmount > 0) {
             System.out.println(EventBadge.getBadgeForDiscount(totalAmount));
         }
+
         if (totalAmount == 0) {
             System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
         }
@@ -121,6 +124,7 @@ public class OutputView {
 
     private void showWeekdayDiscount(Order order, LocalDate date) {
         String weekdayDiscountAmount = formatAmount(DiscountEvent.WEEKDAY_DISCOUNT.calculateDiscount(order, date));
+
         if (!weekdayDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
             System.out.printf(ViewMessage.SHOW_WEEKDAY_EVENT_MESSAGE.getViewMessage(), weekdayDiscountAmount);
             System.out.println();
@@ -129,6 +133,7 @@ public class OutputView {
 
     private void showWeekendDiscount(Order order, LocalDate date) {
         String weekendDiscountAmount = formatAmount(DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date));
+
         if (!weekendDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
             System.out.printf(ViewMessage.SHOW_WEEKEND_EVENT_MESSAGE.getViewMessage(), weekendDiscountAmount);
             System.out.println();
@@ -137,6 +142,7 @@ public class OutputView {
 
     private void showSpecialDiscount(Order order, LocalDate date) {
         String specialDiscountAmount = formatAmount(DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date));
+
         if (!specialDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
             System.out.printf(ViewMessage.SHOW_SPECIAL_EVENT_MESSAGE.getViewMessage(), specialDiscountAmount);
             System.out.println();
@@ -145,6 +151,7 @@ public class OutputView {
 
     private void showChampagneGift(Order order, LocalDate date) {
         String champagneGiftAmount = formatAmount(DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date));
+
         if (!champagneGiftAmount.equals(ViewMessage.NONE.getViewMessage())) {
             System.out.printf(ViewMessage.SHOW_GIFT_EVENT_MESSAGE.getViewMessage(), champagneGiftAmount);
             System.out.println();
