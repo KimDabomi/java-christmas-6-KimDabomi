@@ -14,11 +14,18 @@ public enum EventBadge {
     }
 
     public static String getBadgeForDiscount(int totalDiscount) {
-        for (EventBadge eventBadge : EventBadge.values()) {
-            if (totalDiscount >= eventBadge.totalDiscountAmount) {
-                return eventBadge.badge;
-            }
+        if (totalDiscount >= STAR.totalDiscountAmount && totalDiscount < TREE.totalDiscountAmount) {
+            return STAR.badge;
         }
+
+        if (totalDiscount >= TREE.totalDiscountAmount && totalDiscount < SANTA.totalDiscountAmount) {
+            return TREE.badge;
+        }
+
+        if (totalDiscount >= SANTA.totalDiscountAmount) {
+            return SANTA.badge;
+        }
+
         return "없음";
     }
 }

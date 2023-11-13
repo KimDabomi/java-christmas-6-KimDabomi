@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.event.DiscountEvent;
+import christmas.domain.event.EventBadge;
 import christmas.domain.event.NumberOfEvent;
 import christmas.domain.order.Order;
 import java.text.DecimalFormat;
@@ -83,6 +84,19 @@ public class OutputView {
 
         System.out.println("\n<할인 후 예상 결제 금액>");
         System.out.printf("%s원", totalFinalAmount);
+    }
+
+    public void showBadge(Order order, LocalDate date) {
+        int totalAmount = DiscountEvent.getTotalDiscountAmount(order, date);
+        System.out.println();
+        System.out.println("\n<12월 이벤트 배지>");
+
+        if (totalAmount > 0) {
+            System.out.println(EventBadge.getBadgeForDiscount(totalAmount));
+        }
+        if (totalAmount == 0) {
+            System.out.println("없음");
+        }
     }
 
     private void showDiscount(Order order, LocalDate date) {

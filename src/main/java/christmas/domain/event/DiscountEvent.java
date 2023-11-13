@@ -65,13 +65,13 @@ public enum DiscountEvent {
         int weekendDiscountAmount = DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date);
         int specialDiscountAmount = DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date);
         int champagneGiftAmount = DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
-        int totalAmount = christmasDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + specialDiscountAmount + champagneGiftAmount;
+        int totalDiscountAmount = christmasDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + specialDiscountAmount + champagneGiftAmount;
 
-        if (totalAmount < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
-            totalAmount = NumberOfEvent.ZERO.getNumberOfEvent();
+        if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
+            totalDiscountAmount = NumberOfEvent.ZERO.getNumberOfEvent();
         }
 
-        return totalAmount;
+        return totalDiscountAmount;
     }
 
     public static int getTotalAmount(Order order, LocalDate date) {

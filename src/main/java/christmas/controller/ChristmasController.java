@@ -39,6 +39,7 @@ public class ChristmasController {
                 printOrder(order, date);
                 startDiscountList(order, localDate);
                 startFinalAmount(order, localDate);
+                startBadge(order, localDate);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -61,5 +62,9 @@ public class ChristmasController {
 
     private void startFinalAmount(Order order, LocalDate date) {
         outputView.showFinalAmount(order, date);
+    }
+
+    private void startBadge(Order order, LocalDate date) {
+        outputView.showBadge(order, date);
     }
 }

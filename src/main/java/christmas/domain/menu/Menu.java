@@ -23,8 +23,6 @@ public enum Menu {
     private final String category;
     private final String foodName;
     private final int price;
-    private static final Map<String, String> koreanMenu = Collections.unmodifiableMap(Stream.of(values()).collect(
-            Collectors.toMap(Menu::getFoodName, Menu::name)));
 
     Menu(String category, String foodName, int price) {
         this.category = category;
