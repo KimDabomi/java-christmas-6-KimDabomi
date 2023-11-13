@@ -4,6 +4,7 @@ import christmas.domain.event.DiscountEvent;
 import christmas.domain.event.EventBadge;
 import christmas.domain.event.NumberOfEvent;
 import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
@@ -20,50 +21,52 @@ public class OutputView {
     }
 
     public void showEventPreview(int date) {
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
+        System.out.printf(ViewMessage.SHOW_PREVIEW_EVENT_MESSAGE.getViewMessage(), date);
         System.out.println();
     }
 
     public void showOrderList(Order order) {
         if (order != null) {
-            System.out.println("\n<주문 메뉴>");
+            System.out.println(ViewMessage.SHOW_ORDER_MENU_MESSAGE.getViewMessage());
             order.printOrderList();
         }
     }
 
     public void showTotalAmountBeforeDiscount(Order order) {
         if (order != null) {
-            System.out.println("<할인 전 총주문 금액>");
+            System.out.println(ViewMessage.SHOW_BEFORE_DISCOUNT_AMOUNT_MESSAGE.getViewMessage());
             String totalAmountBeforeDiscount = formatAmount(order.getTotalAmountBeforeDiscount());
             System.out.printf("%s원", totalAmountBeforeDiscount);
+            System.out.println();
         }
     }
 
     public void showGiftMenu(Order order, LocalDate date) {
         int champagneDiscount = DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
+        System.out.print(ViewMessage.SHOW_GIFT_TITLE_MESSAGE.getViewMessage());
 
         if (champagneDiscount > NumberOfEvent.ZERO.getNumberOfEvent()) {
-            System.out.println("\n\n<증정 메뉴>\n샴페인 1개");
+            System.out.println(ViewMessage.SHOW_GIFT_MENU_MESSAGE.getViewMessage());
         }
 
         if (champagneDiscount == NumberOfEvent.ZERO.getNumberOfEvent()){
-            System.out.println("\n\n<증정 메뉴>\n없음");
+            System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
         }
     }
 
     public void showDiscountList(Order order, LocalDate date) {
-        System.out.println();
-        System.out.println("<혜택 내역>");
+        System.out.print(ViewMessage.SHOW_EVENT_LIST_TITLE_MESSAGE.getViewMessage());
+
         if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             showDiscount(order, date);
         }
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
-            System.out.println("없음");
+            System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
         }
     }
 
     public void showTotalDiscountAmount(Order order, LocalDate date) {
-        System.out.println("\n<총혜택 금액>");
+        System.out.println(ViewMessage.SHOW_TOTAL_EVENT_TITLE_MESSAGE.getViewMessage());
         int totalAmount = DiscountEvent.getTotalDiscountAmount(order, date);
         String totalDiscountAmount = formatAmount(totalAmount);
 
@@ -82,20 +85,20 @@ public class OutputView {
         int finalAmount = DiscountEvent.getTotalAmount(order, date);
         String totalFinalAmount = formatAmount(finalAmount);
 
-        System.out.println("\n<할인 후 예상 결제 금액>");
+        System.out.println(ViewMessage.SHOW_FINAL_AMOUNT_MESSAGE.getViewMessage());
         System.out.printf("%s원", totalFinalAmount);
     }
 
     public void showBadge(Order order, LocalDate date) {
         int totalAmount = DiscountEvent.getTotalDiscountAmount(order, date);
         System.out.println();
-        System.out.println("\n<12월 이벤트 배지>");
+        System.out.print(ViewMessage.SHOW_BADGE_MESSAGE.getViewMessage());
 
         if (totalAmount > 0) {
             System.out.println(EventBadge.getBadgeForDiscount(totalAmount));
         }
         if (totalAmount == 0) {
-            System.out.println("없음");
+            System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
         }
     }
 
@@ -110,46 +113,46 @@ public class OutputView {
     private void showChristmasDiscount(Order order, LocalDate date) {
         String christmasDiscountAmount = formatAmount(DiscountEvent.CHRISTMAS_D_DAY.calculateDiscount(order, date));
 
-        if (!christmasDiscountAmount.equals("0")) {
-            System.out.printf("크리스마스 디데이 할인: -%s원", christmasDiscountAmount);
+        if (!christmasDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
+            System.out.printf(ViewMessage.SHOW_CHRISTMAS_EVENT_MESSAGE.getViewMessage(), christmasDiscountAmount);
             System.out.println();
         }
     }
 
     private void showWeekdayDiscount(Order order, LocalDate date) {
         String weekdayDiscountAmount = formatAmount(DiscountEvent.WEEKDAY_DISCOUNT.calculateDiscount(order, date));
-        if (!weekdayDiscountAmount.equals("0")) {
-            System.out.printf("평일 할인: -%s원", weekdayDiscountAmount);
+        if (!weekdayDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
+            System.out.printf(ViewMessage.SHOW_WEEKDAY_EVENT_MESSAGE.getViewMessage(), weekdayDiscountAmount);
             System.out.println();
         }
     }
 
     private void showWeekendDiscount(Order order, LocalDate date) {
         String weekendDiscountAmount = formatAmount(DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date));
-        if (!weekendDiscountAmount.equals("0")) {
-            System.out.printf("주말 할인: -%s원", weekendDiscountAmount);
+        if (!weekendDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
+            System.out.printf(ViewMessage.SHOW_WEEKEND_EVENT_MESSAGE.getViewMessage(), weekendDiscountAmount);
             System.out.println();
         }
     }
 
     private void showSpecialDiscount(Order order, LocalDate date) {
         String specialDiscountAmount = formatAmount(DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date));
-        if (!specialDiscountAmount.equals("0")) {
-            System.out.printf("특별 할인: -%s원", specialDiscountAmount);
+        if (!specialDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
+            System.out.printf(ViewMessage.SHOW_SPECIAL_EVENT_MESSAGE.getViewMessage(), specialDiscountAmount);
             System.out.println();
         }
     }
 
     private void showChampagneGift(Order order, LocalDate date) {
         String champagneGiftAmount = formatAmount(DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date));
-        if (!champagneGiftAmount.equals("0")) {
-            System.out.printf("증정 이벤트: -%s원", champagneGiftAmount);
+        if (!champagneGiftAmount.equals(ViewMessage.NONE.getViewMessage())) {
+            System.out.printf(ViewMessage.SHOW_GIFT_EVENT_MESSAGE.getViewMessage(), champagneGiftAmount);
             System.out.println();
         }
     }
 
     private String formatAmount(int amount) {
-        DecimalFormat decFormat = new DecimalFormat("###,###");
+        DecimalFormat decFormat = new DecimalFormat(ViewMessage.AMOUNT_FORMAT.getViewMessage());
         return decFormat.format(amount);
     }
 }
