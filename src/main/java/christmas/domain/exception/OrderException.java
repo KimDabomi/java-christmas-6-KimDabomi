@@ -12,13 +12,13 @@ public class OrderException extends IllegalArgumentException {
 
     public static void checkDateType(String date) {
         if (!date.matches(numberType)) {
-            throw new OrderException(ErrorMessage.DATE_TYPE_ERROR_MESSAGE.getErrorMessage());
+            throw new OrderException(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage());
         }
     }
 
     public static void checkDateRange(int date) {
         if (date < NumberOfException.MIN_DATE.getNumber() || date > NumberOfException.MAX_DATE.getNumber()) {
-            throw new OrderException(ErrorMessage.DATE_RANGE_ERROR_MESSAGE.getErrorMessage());
+            throw new OrderException(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage());
         }
     }
 
@@ -49,7 +49,7 @@ public class OrderException extends IllegalArgumentException {
         }
 
         if (allDrinks) {
-            throw new OrderException(ErrorMessage.ORDER_ONLY_DRINK_ERROR_MESSAGE.getErrorMessage());
+            throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
         }
     }
 

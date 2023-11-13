@@ -36,14 +36,14 @@ public class OrderTest {
     @DisplayName("날짜에 문자 입력한 경우 예외 확인")
     void getDate_날짜에_문자_입력한_경우() {
         String date = "a3";
-        testDateExceptions(date, ErrorMessage.DATE_TYPE_ERROR_MESSAGE);
+        testDateExceptions(date, ErrorMessage.DATE_ERROR_MESSAGE);
     }
 
     @Test
     @DisplayName("1~31 범위가 아닌 날짜를 입력한 경우 예외 확인")
     void getDate_1_31_범위가_아닌_날짜를_입력한_경우() {
         String date = "40";
-        testDateExceptions(date, ErrorMessage.DATE_RANGE_ERROR_MESSAGE);
+        testDateExceptions(date, ErrorMessage.DATE_ERROR_MESSAGE);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class OrderTest {
     void getOrderItems_음료만_시킨_경우() {
         String[] menuItems = {"제로콜라-2", "샴페인-3"};
 
-        testOrderExceptions(menuItems, ErrorMessage.ORDER_ONLY_DRINK_ERROR_MESSAGE);
+        testOrderExceptions(menuItems, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE);
     }
 
     @Test
