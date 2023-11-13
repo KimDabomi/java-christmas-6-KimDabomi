@@ -9,7 +9,7 @@ public enum ViewMessage {
     SHOW_BEFORE_DISCOUNT_AMOUNT_MESSAGE("<할인 전 총주문 금액>"),
     SHOW_GIFT_TITLE_MESSAGE("\n<증정 메뉴>"),
     SHOW_GIFT_MENU_MESSAGE("\n샴페인 1개"),
-    SHOW_NONE_MESSAGE("\n없음"),
+    SHOW_NONE_MESSAGE("없음"),
     SHOW_EVENT_LIST_TITLE_MESSAGE("\n<혜택 내역>"),
     SHOW_TOTAL_EVENT_TITLE_MESSAGE("\n<총혜택 금액>"),
     SHOW_FINAL_AMOUNT_MESSAGE("\n<할인 후 예상 결제 금액>"),

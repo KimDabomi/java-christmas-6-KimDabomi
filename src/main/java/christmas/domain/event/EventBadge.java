@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import christmas.view.ViewMessage;
+
 public enum EventBadge {
     STAR(5000, "별"),
     TREE(10000, "트리"),
@@ -26,6 +28,6 @@ public enum EventBadge {
             return SANTA.badge;
         }
 
-        return "없음";
+        return ViewMessage.SHOW_NONE_MESSAGE.getViewMessage();
     }
 }

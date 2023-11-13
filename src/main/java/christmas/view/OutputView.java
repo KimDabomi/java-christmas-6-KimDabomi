@@ -43,7 +43,7 @@ public class OutputView {
 
     public void showGiftMenu(Order order, LocalDate date) {
         int champagneDiscount = DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
-        System.out.print(ViewMessage.SHOW_GIFT_TITLE_MESSAGE.getViewMessage());
+        System.out.println(ViewMessage.SHOW_GIFT_TITLE_MESSAGE.getViewMessage());
 
         if (champagneDiscount > NumberOfEvent.ZERO.getNumberOfEvent()) {
             System.out.println(ViewMessage.SHOW_GIFT_MENU_MESSAGE.getViewMessage());
@@ -55,7 +55,7 @@ public class OutputView {
     }
 
     public void showDiscountList(Order order, LocalDate date) {
-        System.out.print(ViewMessage.SHOW_EVENT_LIST_TITLE_MESSAGE.getViewMessage());
+        System.out.println(ViewMessage.SHOW_EVENT_LIST_TITLE_MESSAGE.getViewMessage());
 
         if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             showDiscount(order, date);
@@ -92,7 +92,7 @@ public class OutputView {
     public void showBadge(Order order, LocalDate date) {
         int totalAmount = DiscountEvent.getTotalDiscountAmount(order, date);
         System.out.println();
-        System.out.print(ViewMessage.SHOW_BADGE_MESSAGE.getViewMessage());
+        System.out.println(ViewMessage.SHOW_BADGE_MESSAGE.getViewMessage());
 
         if (totalAmount > 0) {
             System.out.println(EventBadge.getBadgeForDiscount(totalAmount));
