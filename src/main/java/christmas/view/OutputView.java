@@ -36,7 +36,7 @@ public class OutputView {
         if (order != null) {
             System.out.println(ViewMessage.SHOW_BEFORE_DISCOUNT_AMOUNT_MESSAGE.getViewMessage());
             String totalAmountBeforeDiscount = formatAmount(order.getTotalAmountBeforeDiscount());
-            System.out.printf("%s원", totalAmountBeforeDiscount);
+            System.out.printf(ViewMessage.SHOW_STRING_AMOUNT_MESSAGE.getViewMessage(), totalAmountBeforeDiscount);
             System.out.println();
         }
     }
@@ -72,13 +72,13 @@ public class OutputView {
         String totalDiscountAmount = formatAmount(totalAmount);
 
         if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
-            System.out.printf("-%s원", totalDiscountAmount);
+            System.out.printf(ViewMessage.SHOW_MINUS_AMOUNT_MESSAGE.getViewMessage(), totalDiscountAmount);
             System.out.println();
         }
 
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             totalAmount = 0;
-            System.out.printf("%d원", totalAmount);
+            System.out.printf(ViewMessage.SHOW_INT_AMOUNT_MESSAGE.getViewMessage(), totalAmount);
             System.out.println();
         }
     }
@@ -88,7 +88,7 @@ public class OutputView {
         String totalFinalAmount = formatAmount(finalAmount);
 
         System.out.println(ViewMessage.SHOW_FINAL_AMOUNT_MESSAGE.getViewMessage());
-        System.out.printf("%s원", totalFinalAmount);
+        System.out.printf(ViewMessage.SHOW_STRING_AMOUNT_MESSAGE.getViewMessage(), totalFinalAmount);
     }
 
     public void showBadge(Order order, LocalDate date) {

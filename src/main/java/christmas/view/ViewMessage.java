@@ -19,6 +19,9 @@ public enum ViewMessage {
     SHOW_WEEKEND_EVENT_MESSAGE("주말 할인: -%s원"),
     SHOW_SPECIAL_EVENT_MESSAGE("특별 할인: -%s원"),
     SHOW_GIFT_EVENT_MESSAGE("증정 이벤트: -%s원"),
+    SHOW_MINUS_AMOUNT_MESSAGE("-%s원"),
+    SHOW_INT_AMOUNT_MESSAGE("%d원"),
+    SHOW_STRING_AMOUNT_MESSAGE("%s원"),
     SPLIT_CRITERIA(","),
     NONE("0"),
     AMOUNT_FORMAT("###,###");
