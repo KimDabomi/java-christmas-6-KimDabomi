@@ -20,14 +20,10 @@ public class ChristmasController {
     }
 
     private void startDate() {
-        while (true) {
-            try {
-                processOrder();
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        executeWithRetry(() -> {
+            processOrder();
+            return null;
+        });
     }
 
     private void processOrder() {
@@ -55,7 +51,7 @@ public class ChristmasController {
     }
 
     private void printOrder(Order order, int date) {
-        outputView.showOrderItems(order);
+        outputView.showOrderItems();
         outputView.showEventPreview(date);
         outputView.showOrderList(order);
         outputView.showTotalAmountBeforeDiscount(order);

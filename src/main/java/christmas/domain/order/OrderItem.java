@@ -2,8 +2,6 @@ package christmas.domain.order;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.exception.OrderItemException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OrderItem {
     private final Menu menu;

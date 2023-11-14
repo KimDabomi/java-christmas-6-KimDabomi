@@ -4,7 +4,6 @@ import christmas.domain.event.DiscountEvent;
 import christmas.domain.event.EventBadge;
 import christmas.domain.event.NumberOfEvent;
 import christmas.domain.order.Order;
-import christmas.domain.order.OrderItem;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
@@ -14,7 +13,7 @@ public class OutputView {
     public OutputView() {
     }
 
-    public void showOrderItems(Order order) {
+    public void showOrderItems() {
         if (order != null) {
             order.printOrderItems();
         }
@@ -106,14 +105,14 @@ public class OutputView {
     }
 
     private void showDiscount(Order order, LocalDate date) {
-        showChristmasDiscount(order, date);
+        showChristmasDiscount(date);
         showWeekdayDiscount(order, date);
-        showWeekendDiscount(order, date);
-        showSpecialDiscount(order, date);
+        showWeekendDiscount(date);
+        showSpecialDiscount(date);
         showChampagneGift(order, date);
     }
 
-    private void showChristmasDiscount(Order order, LocalDate date) {
+    private void showChristmasDiscount(LocalDate date) {
         String christmasDiscountAmount = formatAmount(DiscountEvent.CHRISTMAS_D_DAY.calculateDiscount(order, date));
 
         if (!christmasDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
@@ -131,7 +130,7 @@ public class OutputView {
         }
     }
 
-    private void showWeekendDiscount(Order order, LocalDate date) {
+    private void showWeekendDiscount(LocalDate date) {
         String weekendDiscountAmount = formatAmount(DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date));
 
         if (!weekendDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
@@ -140,7 +139,7 @@ public class OutputView {
         }
     }
 
-    private void showSpecialDiscount(Order order, LocalDate date) {
+    private void showSpecialDiscount(LocalDate date) {
         String specialDiscountAmount = formatAmount(DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date));
 
         if (!specialDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
