@@ -14,7 +14,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-
 public class DiscountEventTest {
     private static Stream<Arguments> provideDiscountTypeTestData() {
         return Stream.of(
@@ -32,7 +31,6 @@ public class DiscountEventTest {
             Arguments.of(LocalDate.of(2023, 12, 27), new Order(List.of(new OrderItem(Menu.TAPAS, "1"), new OrderItem(Menu.ZERO_COLA, "1"))), 0)
         );
     }
-
 
     private static Stream<Arguments> provideTotalAmountTestData() {
         return Stream.of(

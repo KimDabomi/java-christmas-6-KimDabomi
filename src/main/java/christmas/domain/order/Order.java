@@ -1,8 +1,5 @@
 package christmas.domain.order;
 
-import christmas.domain.menu.Menu;
-
-import christmas.domain.exception.OrderException;
 import java.util.List;
 
 public class Order {
@@ -10,32 +7,6 @@ public class Order {
 
     public Order(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
-    }
-
-    public static int getDate(String date) {
-        OrderException.checkDateType(date);
-
-        int visitingDate = Integer.parseInt(date);
-        OrderException.checkDateRange(visitingDate);
-
-        return visitingDate;
-    }
-
-    public static Order getOrderItems(String[] menuItems, List<OrderItem> orderItemList) {
-        for (String item : menuItems) {
-            String[] details = item.split("-");
-            OrderException.checkOrderType(menuItems);
-
-            String menuName = details[0].trim();
-            String quantity = details[1].trim();
-
-            Menu menu = Menu.of(Menu.removeWhiteSpace(menuName));
-
-            orderItemList.add(new OrderItem(menu, quantity));
-        }
-
-        OrderException.checkOrderItemExceptions(orderItemList);
-        return new Order(orderItemList);
     }
 
     public int getTotalAmountBeforeDiscount() {

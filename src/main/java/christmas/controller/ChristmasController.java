@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.order.Order;
+import christmas.domain.order.OrderInformation;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ public class ChristmasController {
     private void processOrder() {
         executeWithRetry(() -> {
             String dateInput = inputView.readDate();
-            int date = Order.getDate(dateInput);
+            int date = OrderInformation.getDate(dateInput);
             LocalDate localDate = LocalDate.ofEpochDay(date);
 
             processEvent(date, localDate);

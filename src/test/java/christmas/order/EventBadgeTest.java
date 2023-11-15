@@ -24,6 +24,7 @@ public class EventBadgeTest {
                 Arguments.of(LocalDate.of(2023, 12, 27), new Order(List.of(new OrderItem(Menu.TAPAS, "1"), new OrderItem(Menu.ZERO_COLA, "1"))), "없음")
         );
     }
+
     @ParameterizedTest(name = "배지유형: {2}")
     @MethodSource("provideBadgeTestData")
     @DisplayName("이벤트 배지 - 산타")

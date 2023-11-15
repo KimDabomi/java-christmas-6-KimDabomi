@@ -1,6 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.domain.order.OrderInformation;
 import christmas.domain.order.OrderItem;
 import christmas.domain.order.Order;
 
@@ -23,6 +24,6 @@ public class InputView {
         String[] menuItems = Console.readLine().split(ViewMessage.SPLIT_CRITERIA.getViewMessage());
         List<OrderItem> orderItemList = new ArrayList<>();
 
-        return Order.getOrderItems(menuItems, orderItemList);
+        return OrderInformation.getOrderItems(menuItems, orderItemList);
     }
 }
