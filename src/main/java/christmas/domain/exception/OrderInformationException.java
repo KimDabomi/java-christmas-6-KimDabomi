@@ -1,8 +1,5 @@
 package christmas.domain.exception;
 
-import christmas.domain.order.OrderItem;
-import java.util.List;
-
 public class OrderInformationException extends IllegalArgumentException{
     private static final String numberType = "[+-]?\\d*(\\.\\d+)?";
 

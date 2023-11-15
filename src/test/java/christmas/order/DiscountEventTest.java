@@ -39,7 +39,7 @@ public class DiscountEventTest {
         );
     }
 
-    @ParameterizedTest(name = "이벤트 유형: {0}, 예상결과: {3}")
+    @ParameterizedTest(name = "{index} - 이벤트 유형: {0}, 예상 결과: {3}")
     @MethodSource("provideDiscountTypeTestData")
     @DisplayName("할인 이벤트별 할인 금액 계산")
     void testDiscountType(DiscountEvent event,  LocalDate testDate, Order testOrder, int expectedDiscount) {

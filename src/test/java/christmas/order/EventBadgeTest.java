@@ -25,9 +25,9 @@ public class EventBadgeTest {
         );
     }
 
-    @ParameterizedTest(name = "배지유형: {2}")
+    @ParameterizedTest(name = "{index} - 배지 유형: {2}")
     @MethodSource("provideBadgeTestData")
-    @DisplayName("이벤트 배지 - 산타")
+    @DisplayName("이벤트 배지 유형별 확인")
     void testBadge(LocalDate testDate, Order testOrder, String expectedBadge) {
         int totalDiscountAmount = DiscountEvent.getTotalDiscountAmount(testOrder, testDate);
         String badge = EventBadge.getBadgeForDiscount(totalDiscountAmount);

@@ -26,7 +26,7 @@ public class OrderTest {
         );
     }
 
-    @ParameterizedTest(name = "주문 내역: {0}, 예상 결과: {1}")
+    @ParameterizedTest(name = "{index} - 주문 내역: {0}, 예상 결과: {1}")
     @MethodSource("provideOrderQuantityTestData")
     @DisplayName("카테고리 개수 확인")
     void testTotalQuantityForCategory(OrderItem orderItem, int expected) {
@@ -38,7 +38,7 @@ public class OrderTest {
         assertThat(categoryQuantity).isEqualTo(expected);
     }
 
-    @ParameterizedTest(name = "주문 내역: {0}, 예상 결과: {1}")
+    @ParameterizedTest(name = "{index} - 주문 내역: {0}, 예상 결과: {1}")
     @MethodSource("provideOrderAmountTestData")
     @DisplayName("할인 전 총 금액 계산 확인")
     void testTotalPriceBeforeDiscount(OrderItem orderItem, int expected) {

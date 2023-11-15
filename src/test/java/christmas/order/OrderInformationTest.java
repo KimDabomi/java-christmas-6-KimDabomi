@@ -21,7 +21,7 @@ public class OrderInformationTest {
         return Stream.of(
                 Arguments.of(new String[]{"양송이수프2"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
                 Arguments.of(new String[]{"제로콜라-2", "샴페인-3"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
-                Arguments.of(new String[]{"티본스테이크-22"}, ErrorMessage.ORDER_TOTAL_QUANTITY_MAXIMUM_ERROR_MESSAGE),
+                Arguments.of(new String[]{"티본스테이크-22"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
                 Arguments.of(new String[]{"티본스테이크-0"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
                 Arguments.of(new String[]{"티본스테이크-1", "티본스테이크-1"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
                 Arguments.of(new String[]{"라면-1"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE)
@@ -37,14 +37,14 @@ public class OrderInformationTest {
                 .hasMessageContaining(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage());
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} - 주문 내역: {0}, 예상 결과: {1}")
     @MethodSource("provideOrderExceptionsTestData")
     @DisplayName("주문 예외 상황 테스트")
-    void testOrderExceptions(String[] menuItems) {
+    void testOrderExceptions(String[] menuItems, ErrorMessage errorMessage) {
         List<OrderItem> actualOrderItems = new ArrayList<>();
         assertThatThrownBy(() -> OrderInformation.getOrderItems(menuItems, actualOrderItems))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
+                .hasMessageContaining(errorMessage.getErrorMessage());
     }
 
     @Test
