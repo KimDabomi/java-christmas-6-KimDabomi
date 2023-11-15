@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class OrderInformationTest {
-    private static Stream<Arguments> provideOrderExceptions() {
+    private static Stream<Arguments> provideOrderExceptionsTestData() {
         return Stream.of(
                 Arguments.of(new String[]{"양송이수프2"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
                 Arguments.of(new String[]{"제로콜라-2", "샴페인-3"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
@@ -38,13 +38,21 @@ public class OrderInformationTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideOrderExceptions")
+    @MethodSource("provideOrderExceptionsTestData")
     @DisplayName("주문 예외 상황 테스트")
     void testOrderExceptions(String[] menuItems) {
         List<OrderItem> actualOrderItems = new ArrayList<>();
         assertThatThrownBy(() -> OrderInformation.getOrderItems(menuItems, actualOrderItems))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
+    }
+
+    @Test
+    @DisplayName("날짜 확인")
+    void getDate_확인() {
+        String date = "3";
+        int resultDate = OrderInformation.getDate(date);
+        assertThat(resultDate).isEqualTo(3);
     }
 
     @Test
